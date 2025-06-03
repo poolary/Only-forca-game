@@ -1,0 +1,61 @@
+#include <iostream>
+#include <cstdlib> // Para usar system("cls")
+using namespace std;
+int main() {
+
+	char palavra[30], letra[1], secreta[30];
+	int tam, i, chances, acertos;
+	bool acerto; 
+
+	chances = 6;
+	tam = 0;
+	i = 0;
+	acerto = false;
+	acertos = 0;
+
+	cout << "Digite a palavra para seu colega tentar acertar: "; 
+	cin >> palavra; 
+	system("cls"); // Limpa a tela e para funcionar precisa incluir <cstdlib> ou <stdlib.h>
+
+	//tam = strlen(palavra); // Calcula o tamanho da palavra
+	while (palavra[i] != '\0') { // \0 é o caractere nulo que indica o fim da string
+		i++;
+		tam++; // quando encontrar o \0 significa que a palavra acabou e o tamanho foi calculado
+}
+
+	for (int i = 0; i < tam; i++) { // Preenche a palavra secreta com _
+		secreta[i] = '_';
+	}
+
+	while ((chances > 0) && (acertos < tam)) { // Enquanto ainda houver chances e não acertou todas as letras
+		cout << "Chances restantes: " << chances << "\n\n";
+		cout << "Palavra secreta: ";
+		for (i = 0; i < tam; i++) {
+			cout << secreta[i] << " "; // Mostra a palavra secreta com os _
+		}
+		cout << "\n\nDigite uma letra: ";
+		cin >> letra[0]; // Lê a letra digitada pelo usuário e armazena no vetor zero
+		for (i = 0; i < tam; i++) {
+			if (palavra[i] == letra[0]) {
+				acerto = true; // Se a letra digitada for igual a alguma letra da palavra, acerto recebe true
+				secreta[i] = palavra[i]; // Coloca a letra na posição correta da palavra secreta
+				acertos++; // Incrementa o número de acertos}
+			}
+		}
+		if(!acerto){ // Se não acertou a letra
+			chances--; // Diminui o número de chances
+			cout << "Letra incorreta! Tente novamente.\n\n";
+		} 
+		acerto = false; // Reseta a variável acerto para false para a próxima iteração
+		system("cls"); // Limpa a tela para mostrar o progresso do jogo
+	}
+	if (acertos == tam) {
+		cout << "Parabéns! Você acertou a palavra: " << palavra << "\n"; // Se acertou todas as letras
+	}else{
+		cout << "Você perdeu! A palavra era: " << palavra << "\n"; // Se não acertou todas as letras
+	}
+
+	system("pause"); // Pausa o programa para que o usuário veja o resultado
+
+	return 0;
+}
